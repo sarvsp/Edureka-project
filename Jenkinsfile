@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent { 
+     label 'jenkinsagent'
+}
     stages {
         stage('Compile') {
             steps {
