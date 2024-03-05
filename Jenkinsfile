@@ -27,7 +27,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker-build --no-cache -t edurekafinalproject1:latest .'
+                    // Build Docker image
+                    def customImage = docker.build('edurekafinalproject1:latest', '--no-cache .')
                 }
             }
         }
