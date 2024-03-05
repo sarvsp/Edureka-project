@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker-build --no-cache -t edurekafinalproject:latest .'
+                    sh 'docker-build --no-cache -t edurekafinalproject1:latest .'
                 }
             }
         }
