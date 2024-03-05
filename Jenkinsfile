@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'dockerworkernode'
+        label 'dockerslave'
     }
     environment {
         BRANCH_NAME = 'master'
