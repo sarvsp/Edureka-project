@@ -6,13 +6,6 @@ pipeline {
         BRANCH_NAME = 'master'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM',
-                    branches: [[name: "${BRANCH_NAME}"]],
-                    userRemoteConfigs: [[url: 'https://github.com/sarvsp/Edureka-project.git']]])
-            }
-        }
         stage('Compile') {
             steps {
                 echo 'compiling...'
@@ -34,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker-build --no-cache -t edurekafinalproject:latest ."
+                    sh 'docker-build --no-cache -t edurekafinalproject:latest .'
                 }
             }
         }
