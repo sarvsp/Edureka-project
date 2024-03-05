@@ -40,15 +40,5 @@ pipeline {
                 }
             }
         }    
-        // Add more stages if needed
-    }
-    post {
-        always {
-            // Clean up: Stop and remove the Docker container
-            script {
-                customContainer.stop()
-                customContainer.remove(force: true)
-            }
-        }
     }
 }
