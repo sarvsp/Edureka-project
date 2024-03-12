@@ -31,14 +31,6 @@ pipeline {
                     def customImage = docker.build('edurekafinalproject1:latest', '--no-cache .')
                 }
             }
-        }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    // Run Docker container from the built image
-                    def customContainer = customImage.run('-p 8080:80')
-                }
-            }
-        }    
+        }  
     }
 }
