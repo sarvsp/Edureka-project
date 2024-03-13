@@ -1,6 +1,6 @@
 ---
 - name: Build Docker image
-  hosts: loaclhost
+  hosts: localhost
   become: yes
   vars:
     ansible_user: root
