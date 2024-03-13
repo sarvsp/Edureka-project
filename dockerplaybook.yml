@@ -1,6 +1,6 @@
 ---
 - name: Build Docker image
-  hosts: docker.local
+  hosts: loaclhost
   become: yes
   vars:
     ansible_user: root
@@ -14,5 +14,5 @@
         source: build
         build:
           pull: no
-          path: /root/jenkins/
+          path: .
           dockerfile: Dockerfile
