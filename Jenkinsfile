@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'ansible-playbook dockerplaybook.yml  
+                    sh 'ansible-playbook dockerplaybook.yml' 
                 }
             }
         }  
