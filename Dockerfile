@@ -19,7 +19,7 @@ RUN wget -q https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.19/bin/apache-tomcat
     rm -f apache-tomcat-10.1.19.tar.gz
 
 # Copy the WAR file to the webapps directory
-COPY ABCtechnologies-1.0.war $CATALINA_HOME/webapps/
+COPY taregt/ABCtechnologies-1.0.war $CATALINA_HOME/webapps/
 
 # Expose port 8080
 EXPOSE 8080
