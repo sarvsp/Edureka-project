@@ -27,9 +27,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'ansible-playbook dockerplaybook.yml' 
+                    // Build Docker image
+                    def customImage = docker.build('edurekafinalproject1:latest', '--no-cache .')
                 }
             }
-        }  
+        }
     }
 }
