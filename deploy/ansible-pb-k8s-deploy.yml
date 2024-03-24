@@ -10,10 +10,10 @@
             echo "deleteing previous application deployment"
             kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep abc-technologies`
             echo "creating new application deployment"
-            kubectl create deployment abc-technologies --image=sarvanipamarti/abc_technologies:{{ build_number }}
+            kubectl create deployment abc-technologies --image=sarvanipamarti9/abc_technologies:{{ build_number }}
          else
             echo "Deploying abc-technologies Application"
-            kubectl create deployment abc-technologies --image=sarvanipamarti/abc_technologies:{{ build_number }}
+            kubectl create deployment abc-technologies --image=sarvanipamarti9/abc_technologies:{{ build_number }}
          fi
     - name: deploying service
       shell: |
