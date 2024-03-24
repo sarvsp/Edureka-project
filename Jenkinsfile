@@ -19,10 +19,10 @@ pipeline {
                 sh '/opt/apache-maven-3.8.8/bin/mvn package' // Example Maven command
             }
         }
-        post {
-            always {
-                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-            }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
         }
     }
     stage('docker login & ansible playbook for docker build and push') {
