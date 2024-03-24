@@ -1,6 +1,7 @@
 pipeline {
     agent {
         label 'jenkinsagent'
+           }
     stages {
         stage('Compile') {
             steps {
@@ -39,4 +40,3 @@ pipeline {
         }
     }
   }
-}
