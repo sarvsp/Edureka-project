@@ -20,22 +20,12 @@ pipeline {
             }
         }
         stage('docker login & ansible playbook for docker build and push') {
-    steps {
-        withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_LOGIN', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
-            script {
-                def registryUrl = 'https://index.docker.io/v1/'
-                def dockerLogin = "docker login -u ${DOCKER_HUB_USERNAME} --password-stdin ${registryUrl}"
-                def ansiblePlaybook = "ansible-playbook -i localhost, deploy/ansible_dockerbuild_play2.yml"
-                
-                // Log in to Docker Hub
-                sh "echo ${DOCKER_HUB_PASSWORD} | ${dockerLogin}"
-                
-                // Run Ansible playbook for Docker build and push
-                sh ansiblePlaybook
+            steps {
+                withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
+                    sh script: 'ansible-playbook -i localhost, deploy/ansible_dockerbuild_play2.yml'
+                }
             }
         }
-    }
-}
         stage('K8s Deploy-QA') {
             steps {
                 sh 'ansible-playbook --inventory /etc/ansible/hosts deploy/ansible-pb-k8s-deploy.yml'
