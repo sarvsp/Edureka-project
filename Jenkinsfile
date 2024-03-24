@@ -1,5 +1,6 @@
 pipeline {
     agent any
+      label 'dockerslave'
     stages {
         stage('Compile') {
             steps {
