@@ -22,6 +22,8 @@ pipeline {
         stage('docker login & ansible playbook for docker build and push') {
             steps {
                 withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
+                    // Use --password-stdin for more secure Docker login
+                    sh 'echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin'
                     sh script: 'ansible-playbook -i localhost, deploy/ansible_dockerbuild_play2.yml'
                 }
             }
