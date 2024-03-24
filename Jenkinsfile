@@ -20,10 +20,10 @@ pipeline {
             }
         }
         post {
-             always {
-               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-             }
-           }
+          always {
+            archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+          }
+        }
 		stage('docker login & ansible playbook for docker build and push') {
 	       steps {
 	           withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
