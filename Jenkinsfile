@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'jenkinsagent'
+        label 'jenkinsagent'
     stages {
         stage('Compile') {
             steps {
