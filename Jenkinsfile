@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    agent {
+      label 'jenkinsagent'
     stages {
         stage('Compile') {
             steps {
@@ -37,4 +38,5 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
         }
     }
+  }
 }
