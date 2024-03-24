@@ -21,9 +21,10 @@ pipeline {
         }
 	    
         post {
-          always {
-            archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-          }
+             always {
+               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+             }
+           }
         }
 	
 	stage('docker login & ansible playbook for docker build and push') {
@@ -39,4 +40,4 @@ pipeline {
        }
       }
     }   
- }
+ 
