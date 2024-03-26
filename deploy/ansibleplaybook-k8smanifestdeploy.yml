@@ -8,7 +8,7 @@
         api_version: apps/v1
         kind: Deployment
         namespace: default
-        name: abc-technologies
+        name: k8s-pod
       register: existing_deployment
       ignore_errors: yes
 
@@ -19,7 +19,7 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: abc-technologies
+            name: k8s-pod
             namespace: default
       when: existing_deployment is defined and existing_deployment is not none
 
@@ -28,7 +28,7 @@
         api_version: v1
         kind: Service
         namespace: default
-        name: abc-technologies-svc
+        name: k8s-svc
       register: existing_service
       ignore_errors: yes
 
@@ -39,7 +39,7 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: abc-technologies-svc
+            name: k8s-svc
             namespace: default
       when: existing_deployment is defined and existing_deployment is not none
 
