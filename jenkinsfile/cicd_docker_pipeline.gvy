@@ -1,39 +1,45 @@
 pipeline {
-    agent {
-        label 'dockerslave'
+    agent any
+
+    tools {
+        maven 'maven3.8.8'
     }
     stages {
-        stage('Compile') {
-            steps {
-                echo 'compiling...'
-                sh '/opt/apache-maven-3.8.8/bin/mvn compile' // Example Maven command
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh '/opt/apache-maven-3.8.8/bin/mvn test' // Example Maven command
-            }
+        stage('ABC_CodeCompile') {
+           steps {
+             echo "compiling..."
+             git 'https://github.com/lerndevopswithdurga/ABC_Technologies.git'
+             sh 'mvn compile'
+
+           }
+
         }
 
-        post {
+        stage('ABC_Unittest') {
+           steps { 
+             echo "testing..."
+             sh 'mvn test'
+           }
+
+           post {
              always {
               junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
              }
            }
-
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                sh '/opt/apache-maven-3.8.8/bin/mvn package' // Example Maven command
-            }
         }
 
-        post {
+        stage('ABC_Package') {
+           steps {
+              echo "packaging..."
+              sh 'mvn package'
+           }
+
+           post {
              always {
                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
              }
            }
+        }
 
         stage('docker build ') {
 	         steps {
@@ -42,16 +48,18 @@ pipeline {
               sh 'ls -la $WORKSPACE'
               sh 'cd $WORKSPACE'
 	      sh 'docker build --file Dockerfile --tag sarvanipamarti9/abc_technologies:$BUILD_NUMBER .'
+              sh script: 'ansible-playbook -i localhost, deploy/dockerbuild-push.yml'   
            }	
         }
         stage('push docker image') {
 	        steps {
               echo "pushing image to docker hub..."
 	          withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
-                  sh 'docker push docker.io/sarvanipamarti9/abc_technologies:$BUILD_NUMBER'
-                }       
-	     }
-	  }
+              sh 'docker push docker.io/sarvanipamarti9/abc_technologies:$BUILD_NUMBER'
+                }
+	           
+	        }
+		    }
         stage('docker deploy') {
           steps {
             echo "deploying to docker container..."
@@ -62,4 +70,4 @@ pipeline {
           }
         }
     }
- }
+}
