@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven3.8.8'
+        maven 'Maven3.8.8'
     }
     stages {
         stage('ABC_CodeCompile') {
