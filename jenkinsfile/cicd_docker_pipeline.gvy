@@ -49,17 +49,17 @@ pipeline {
                 sh 'docker rm -f abc-container || true' 
                 sh 'docker run -d -P --name abc-container sarvanipamarti9/abc_technologies:$BUILD_NUMBER'
                 sh 'docker ps -a'
-            }
-        }
-    } 
+                 }
+              }
+           } 
            post {
              always {
               junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
              }
            }
-          post {
-            always {
-              archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+           post {
+             always {
+               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
               }
           }
        }
