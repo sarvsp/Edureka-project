@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Check if Deployment exists
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: apps/v1
         kind: Deployment
         namespace: default
@@ -13,7 +13,7 @@
       ignore_errors: yes
 
     - name: Delete Deployment if exists
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         state: absent
         definition:
           apiVersion: apps/v1
@@ -24,7 +24,7 @@
       when: existing_deployment is defined and existing_deployment is not none
 
     - name: Check if Service exists
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: v1
         kind: Service
         namespace: default
@@ -33,7 +33,7 @@
       ignore_errors: yes
 
     - name: Delete Service if exists
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         state: absent
         definition:
           apiVersion: v1
@@ -44,5 +44,4 @@
       when: existing_deployment is defined and existing_deployment is not none
 
     - name: Apply manifest file using kubectl
-      command: kubectl apply -f /etc/kubernetes/kubernetes_deploy.yml
-      
+      shell: kubectl apply -f /etc/kubernetes/kubernetes_deploy.yml
