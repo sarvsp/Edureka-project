@@ -14,7 +14,7 @@ pipeline {
       
       stage('unit-test') {
 	        steps {
-	                sh script: 'sh 'mvn test''
+	                sh script: 'sh 'mvn test'
             }
 	        post {
             success {
@@ -25,7 +25,7 @@ pipeline {
       
       stage('package') {
 	        steps {
-		            sh script: 'sh 'mvn package''	
+		            sh script: 'sh 'mvn package'	
             }		
       }
       
