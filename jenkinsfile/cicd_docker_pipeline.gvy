@@ -56,9 +56,9 @@ pipeline {
          }
        }
 
-   post {
-     always {
-       archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+    post {
+      always {
+        archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
           }
        }
    }
