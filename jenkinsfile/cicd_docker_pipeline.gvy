@@ -52,11 +52,13 @@ pipeline {
                  }
               }
            } 
+
            post {
              always {
-              junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
+               junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
              }
            }
+ 
            post {
              always {
                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
