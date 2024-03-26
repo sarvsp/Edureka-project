@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: abc-pod
+  name: k8s-pod
   labels:
     app: abc_app
 spec:
@@ -25,7 +25,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: abc-svc
+  name: k8s-svc
 spec:
   type: NodePort
   selector:
@@ -33,4 +33,4 @@ spec:
   ports:
   - port: 80
     targetPort: 8080
-    nodePort: 30003
+    nodePort: 30005
