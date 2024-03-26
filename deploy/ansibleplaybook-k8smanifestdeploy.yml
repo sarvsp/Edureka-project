@@ -45,5 +45,4 @@
 
     - name: Apply manifest file using kubectl
       command: kubectl apply -f /etc/kubernetes/kubernetes_deploy.yml
-      args:
-        executable: /bin/bash
+      
