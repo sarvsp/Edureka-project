@@ -57,7 +57,7 @@ pipeline {
               junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
              }
            }
-          post {
+           post {
             always {
               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
               }
