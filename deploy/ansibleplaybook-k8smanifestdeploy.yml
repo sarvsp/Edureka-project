@@ -3,7 +3,7 @@
   hosts: kubeserver
   become: true
   tasks:
-    - name: Check if there is existed Deployment 
+    - name: Check if there is an existing deployment 
       kubernetes.core.k8s_info:
         api_version: apps/v1
         kind: Deployment
@@ -41,7 +41,7 @@
           metadata:
             name: abc-svc
             namespace: default
-      when: existing_deployment is defined and existing_deployment is not none
+      when: existing_service is defined and existing_service is not none
 
     - name: Apply manifest file using kubectl
       shell: kubectl apply -f /etc/kubernetes/k8s_deploy.yml
