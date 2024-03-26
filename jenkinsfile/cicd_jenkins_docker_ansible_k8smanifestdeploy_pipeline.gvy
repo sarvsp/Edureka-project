@@ -7,8 +7,7 @@ pipeline {
       stage('compile') {
 	        steps {
 		            git url: 'https://github.com/sarvsp/Edureka-project.git'
-		            sh 'mvn compile'
-
+		            sh script: 'sh 'mvn compile'
           }
       }
       
