@@ -3,7 +3,7 @@
   hosts: kubeserver
   become: true
   tasks:
-    - name: Check if Deployment exists
+    - name: Check if there is existed Deployment 
       kubernetes.core.k8s_info:
         api_version: apps/v1
         kind: Deployment
