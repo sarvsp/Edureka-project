@@ -3,12 +3,12 @@
   hosts: kubeserver
   become: true
   tasks:
-    - name: Check if there is an existing deployment 
+    - name: Check if Deployment exists
       kubernetes.core.k8s_info:
         api_version: apps/v1
         kind: Deployment
         namespace: default
-        name: abc-pod
+        name: abc-technologies
       register: existing_deployment
       ignore_errors: yes
 
@@ -19,7 +19,7 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: abc-pod
+            name: abc-technologies
             namespace: default
       when: existing_deployment is defined and existing_deployment is not none
 
@@ -28,7 +28,7 @@
         api_version: v1
         kind: Service
         namespace: default
-        name: abc-svc
+        name: abc-technologies-svc
       register: existing_service
       ignore_errors: yes
 
@@ -39,9 +39,11 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: abc-svc
+            name: abc-technologies-svc
             namespace: default
-      when: existing_service is defined and existing_service is not none
+      when: existing_deployment is defined and existing_deployment is not none
 
     - name: Apply manifest file using kubectl
-      shell: kubectl apply -f /etc/kubernetes/k8s_deploy.yml
+      command: kubectl apply -f /etc/kubernetes/abc-app-deploy-k8s-new.yml
+      args:
+        executable: /bin/bash
