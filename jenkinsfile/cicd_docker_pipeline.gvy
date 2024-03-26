@@ -8,7 +8,7 @@ pipeline {
         stage('ABC_CodeCompile') {
            steps {
              echo "compiling..."
-             git 'https://github.com/lerndevopswithdurga/ABC_Technologies.git'
+             git 'https://github.com/sarvsp/Edureka-project.git'
              sh 'mvn compile'
 
            }
