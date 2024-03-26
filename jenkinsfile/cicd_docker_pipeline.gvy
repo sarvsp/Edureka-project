@@ -2,9 +2,6 @@ pipeline {
     agent {
         label 'dockerslave'
     }
-    environment {
-        BRANCH_NAME = 'master'
-    }
     stages {
         stage('Compile') {
             steps {
@@ -18,12 +15,26 @@ pipeline {
                 sh '/opt/apache-maven-3.8.8/bin/mvn test' // Example Maven command
             }
         }
+
+        post {
+             always {
+              junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
+             }
+           }
+
         stage('Build') {
             steps {
                 echo 'Building...'
                 sh '/opt/apache-maven-3.8.8/bin/mvn package' // Example Maven command
             }
         }
+
+        post {
+             always {
+               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+             }
+           }
+
         stage('docker build ') {
 	         steps {
               echo "docker building image..."
@@ -51,16 +62,4 @@ pipeline {
           }
         }
     }
-
-    post {
-      always {
-        junit stdioRetention: '', testResults: 'target/surefire-reports/*.xml'
-         }
-       }
-
-       post {
-             always {
-               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-             }
-           }
-   }
+ }
