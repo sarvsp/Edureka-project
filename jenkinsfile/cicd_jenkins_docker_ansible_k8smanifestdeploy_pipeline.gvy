@@ -7,13 +7,14 @@ pipeline {
       stage('compile') {
 	        steps {
 		            git url: 'https://github.com/sarvsp/Edureka-project.git'
-		            sh script: '/opt/maven/bin/mvn compile'
+		            sh 'mvn compile'
+
           }
       }
       
       stage('unit-test') {
 	        steps {
-	                sh script: '/opt/maven/bin/mvn test'
+	                sh script: 'sh 'mvn test''
             }
 	        post {
             success {
@@ -24,7 +25,7 @@ pipeline {
       
       stage('package') {
 	        steps {
-		            sh script: '/opt/maven/bin/mvn package'	
+		            sh script: 'sh 'mvn package''	
             }		
       }
       
