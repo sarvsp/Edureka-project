@@ -6,7 +6,7 @@ pipeline {
     stages {
       stage('compile') {
 	        steps {
-		            git url: 'https://github.com/lerndevopswithdurga/ABC_Technologies.git'
+		            git url: 'https://github.com/sarvsp/Edureka-project.git'
 		            sh script: '/opt/maven/bin/mvn compile'
           }
       }
